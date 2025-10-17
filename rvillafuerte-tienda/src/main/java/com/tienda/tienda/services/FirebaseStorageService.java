@@ -24,7 +24,7 @@ public class FirebaseStorageService {
         this.storage = storage;
     }
     //Sube un archivo de imagen al almacenamiento de Firebase.    
-    public String uploadImage(MultipartFile localFile, String folder, Long id) throws IOException {
+    public String uploadImage(MultipartFile localFile, String folder, Integer id) throws IOException {
         String originalName = localFile.getOriginalFilename();
         String fileExtension = "";
         if (originalName != null && originalName.contains(".")) {
