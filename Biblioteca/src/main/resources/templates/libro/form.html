@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${libro.id} != null ? 'Editar Libro' : 'Nuevo Libro'">Libro</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<div class="container card">
+  <h2 th:text="${libro.id} != null ? 'Editar Libro' : 'Nuevo Libro'">Libro</h2>
+  <a class="btn" th:href="@{/libros}">Volver</a>
+
+  <form th:action="@{/libros}" th:object="${libro}" method="post">
+    <input type="hidden" th:if="*{id}" th:field="*{id}" />
+
+    <div>
+      <label>Título</label>
+      <input type="text" th:field="*{titulo}" required />
+      <div class="error" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Autor</label>
+        <input type="text" th:field="*{autor}" required />
+        <div class="error" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></div>
+      </div>
+      <div>
+        <label>ISBN</label>
+        <input type="text" th:field="*{isbn}" />
+      </div>
+    </div>
+
+    <div>
+      <label>Categoría</label>
+      <!-- Bind por ID para evitar convertidores -->
+      <select th:field="*{categoria.id}" required>
+        <option th:each="c : ${categorias}" th:value="${c.id}" th:text="${c.nombre}"></option>
+      </select>
+      <div class="error" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
+    </div>
+
+    <div>
+      <label>Descripción</label>
+      <textarea th:field="*{descripcion}" rows="3"></textarea>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Fecha publicación</label>
+        <input type="date" th:field="*{fechaPublicacion}" />
+      </div>
+      <div>
+        <label>Disponible</label>
+        <input type="checkbox" th:field="*{disponible}" />
+      </div>
+    </div>
+
+    <div>
+      <label>Precio</label>
+      <input type="number" th:field="*{precio}" step="0.01" min="0" />
+      <div class="error" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Guardar</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

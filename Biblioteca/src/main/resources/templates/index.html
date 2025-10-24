@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Biblioteca</title>
+        <link rel="stylesheet" th:href="@{/estilos.css}">
+    </head>
+    <body>
+        <div class="container">
+            <h1>📚 Biblioteca</h1>
+            <p>Página de inicio.</p>
+
+            <nav style="margin: 10px 0">
+                <a class="btn" th:href="@{/libros}">Libros</a>
+                <a class="btn btn-primary" th:href="@{/libros/nuevo}">Agregar Libro</a>
+                <a class="btn" th:href="@{/categorias}">Categorías</a>
+                <a class="btn" th:href="@{/categorias/nueva}">Nueva Categoría</a>
+                <a class="btn" th:href="@{/quejas/nueva}">Quejas / Sugerencias</a>
+            </nav>
+
+            <div class="card">
+                <h3>Biblioteca</h3>
+                <img th:src="@{/imagen/imagen.jpg}"
+                     alt="Biblioteca de Washington"
+                     style="width:100%;height:auto;border-radius:12px;display:block">
+            </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${categoria.id} != null ? 'Editar Categoría' : 'Nueva Categoría'">Categoría</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<div class="container card">
+  <h2 th:text="${categoria.id} != null ? 'Editar Categoría' : 'Nueva Categoría'">Categoría</h2>
+  <a class="btn" th:href="@{/categorias}">Volver</a>
+
+  <form th:action="@{/categorias}" th:object="${categoria}" method="post">
+    <input type="hidden" th:if="*{id}" th:field="*{id}" />
+
+    <div>
+      <label>Nombre</label>
+      <input type="text" th:field="*{nombre}" required />
+      <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    </div>
+
+    <div>
+      <label>Descripción</label>
+      <input type="text" th:field="*{descripcion}" />
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Guardar</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

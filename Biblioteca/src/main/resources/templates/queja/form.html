@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Quejas / Sugerencias</title>
+  <link rel="stylesheet" th:href="@{/estilos.css}">
+</head>
+<body>
+<div class="container card">
+  <h2>Envíanos tu comentario</h2>
+  <a class="btn" th:href="@{/}">Inicio</a>
+
+  <div th:if="${ok}" class="alert alert-ok">¡Gracias! Tu mensaje fue enviado.</div>
+
+  <form th:action="@{/quejas}" th:object="${queja}" method="post">
+    <div class="row">
+      <div>
+        <label>Nombre</label>
+        <input type="text" th:field="*{nombreCliente}" />
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" th:field="*{email}" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Teléfono</label>
+        <input type="text" th:field="*{telefono}" />
+      </div>
+      <div>
+        <label>Tipo</label>
+        <select th:field="*{tipo}" required>
+          <option value="CONSULTA">CONSULTA</option>
+          <option value="SUGERENCIA">SUGERENCIA</option>
+          <option value="QUEJA">QUEJA</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label>Asunto</label>
+      <input type="text" th:field="*{asunto}" />
+    </div>
+
+    <div>
+      <label>Mensaje</label>
+      <textarea th:field="*{mensaje}" rows="4" required></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Enviar</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
