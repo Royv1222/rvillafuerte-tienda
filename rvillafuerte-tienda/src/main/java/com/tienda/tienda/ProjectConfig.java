@@ -1,20 +1,9 @@
 package com.tienda.tienda;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Locale;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -69,30 +58,7 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registro) {
         registro.addInterceptor(localeChangeInterceptor());
-    }
-
-    //Bean para poder acceder a los messages.properties en código...
-    @Bean("messageSource")
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("messages");
-        messageSource.setDefaultEncoding("UTF-8");
-        return messageSource;
-    }
-   @Value("${firebase.json.path}")
-    private String jsonPath;
-   
-    @Value("${firebase.json.file}")
-    private String jsonFile;
-    
-    @Bean
-    public Storage storage() throws IOException {
-        ClassPathResource resource = new ClassPathResource(jsonPath + File.separator + jsonFile);
-        try (InputStream inputStream = resource.getInputStream()) {
-            GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
-            return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
-        }
-    }
-
+    }   
 }
+
 
